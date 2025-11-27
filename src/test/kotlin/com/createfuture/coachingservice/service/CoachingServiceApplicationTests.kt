@@ -1,4 +1,4 @@
-package com.createfuture.coaching.service
+package com.createfuture.coachingservice.service
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
