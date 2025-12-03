@@ -11,6 +11,19 @@ class UserProfileService {
     // TODO: This should interact with persistence, somewhere
     private var userCache = mutableMapOf<UUID, UserProfile>()
 
+
+    fun getUsers(): List<UserProfile> {
+        return userCache.values.toList()
+    }
+
+    fun getUser(userId: UUID): UserProfile? {
+        return userCache[userId]
+    }
+    
+    fun setUser(userProfile: UserProfile) {
+        userCache[userProfile.id] = userProfile
+    }
+
     /* SEED UTILS */
 
     fun getRandomName(): String {
