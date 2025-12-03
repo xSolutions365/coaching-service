@@ -12,6 +12,11 @@ import java.util.UUID
 @RequestMapping("/api/v1/user")
 class UserProfileController(private val userProfileService: UserProfileService) {
 
+    @GetMapping("/all")
+    fun getAllUsers(): List<UserProfile> {
+       return userProfileService.getUsers()
+    }
+
     @PostMapping("/seed")
     fun seedUsers(count: Int): List<UUID> {
         return userProfileService.seed(count);
