@@ -3,6 +3,7 @@ package com.createfuture.coachingservice.controller
 import com.createfuture.coachingservice.model.UserProfile
 import com.createfuture.coachingservice.service.UserProfileService
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
@@ -11,6 +12,13 @@ import java.util.UUID
 @RestController
 @RequestMapping("/api/v1/user")
 class UserProfileController(private val userProfileService: UserProfileService) {
+
+    @GetMapping("/{userId}")
+    fun getUserProfile(@PathVariable userId: UUID): UserProfile? {
+        System.out.println("Fetching user profile for userId: $userId")
+
+        return userProfileService.getUser(userId);
+    }
 
     @GetMapping("/all")
     fun getAllUsers(): List<UserProfile> {
