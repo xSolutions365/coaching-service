@@ -1,12 +1,15 @@
 package com.createfuture.coachingservice.model
 
-data class UserProfile(val username: String,
+import java.util.UUID
+
+data class UserProfile(val id: UUID,
+                       val username: String,
                        val preferredName: String,
-                       val slackUsername: String?,
-                       val email: String?,
-                       val phoneNumber: String?,
-                       val bio: String?,
-                       val profilePictureUrl: String?)
+                       val slackUsername: String? = null,
+                       val email: String? = null,
+                       val phoneNumber: String? = null,
+                       val bio: String? = null,
+                       val profilePictureUrl: String? = null)
 {
     init {
         if ((slackUsername.isNullOrBlank()) && (email.isNullOrBlank()) && (phoneNumber.isNullOrBlank())) {
