@@ -1,7 +1,10 @@
 package com.createfuture.coachingservice.controller
 
 import com.createfuture.coachingservice.model.UserProfile
+import com.createfuture.coachingservice.model.response.UserProfileApiResponse
+import com.createfuture.coachingservice.model.response.UserProfileApiResponseEntity
 import com.createfuture.coachingservice.service.UserProfileService
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -37,4 +40,18 @@ class UserProfileController(private val userProfileService: UserProfileService) 
 
         return user
     }
+
+    // -- Extension Functions --
+
+    fun UserProfile?.toApiResponseEntity(): UserProfileApiResponseEntity =
+        UserProfileApiResponseEntity(
+            UserProfileApiResponse(userProfile = this),
+            if (this != null) HttpStatus.OK else HttpStatus.NOT_FOUND
+        )
+
+    fun List<UserProfile>?.toApiResponseEntity(): UserProfileApiResponseEntity =
+        UserProfileApiResponseEntity(
+            UserProfileApiResponse(userProfiles = this),
+            if (this != null) HttpStatus.OK else HttpStatus.NOT_FOUND
+        )
 }
