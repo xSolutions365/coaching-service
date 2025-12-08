@@ -5,6 +5,7 @@ import com.createfuture.coachingservice.model.response.UserProfileApiResponse
 import com.createfuture.coachingservice.model.response.UserProfileApiResponseEntity
 import com.createfuture.coachingservice.service.UserProfileService
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -31,6 +32,13 @@ class UserProfileController(private val userProfileService: UserProfileService) 
     @PostMapping("/seed")
     fun seedUsers(count: Int): List<UUID> {
         return userProfileService.seed(count);
+    }
+
+    @DeleteMapping("/{userId}")
+    fun deleteUserProfile(@PathVariable userId: UUID) {
+        println("Deleting user profile for userId: $userId")
+
+        userProfileService.deleteUser(userId)
     }
 
     @GetMapping("/random")
