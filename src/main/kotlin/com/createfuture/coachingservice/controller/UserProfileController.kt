@@ -4,7 +4,9 @@ import com.createfuture.coachingservice.model.UserProfile
 import com.createfuture.coachingservice.model.response.UserProfileApiResponse
 import com.createfuture.coachingservice.model.response.UserProfileApiResponseEntity
 import com.createfuture.coachingservice.service.UserProfileService
+import com.createfuture.coachingservice.service.UserSeedService
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -16,7 +18,8 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/api/v1/user")
-class UserProfileController(private val userProfileService: UserProfileService) {
+class UserProfileController(private val userProfileService: UserProfileService,
+                            private val userSeedService: UserSeedService) {
 
     @GetMapping("/{userId}")
     fun getUserProfile(@PathVariable userId: UUID): UserProfileApiResponseEntity {
@@ -34,13 +37,6 @@ class UserProfileController(private val userProfileService: UserProfileService) 
         return users.toApiResponseEntity()
     }
 
-    @PostMapping("/seed")
-    fun seedUsers(count: Int): List<UUID> {
-        println("Seeding database with $count user profiles")
-
-        return userProfileService.seed(count)
-    }
-
     @DeleteMapping("/{userId}")
     fun deleteUserProfile(@PathVariable userId: UUID) {
         println("Deleting user profile for userId: $userId")
@@ -48,10 +44,25 @@ class UserProfileController(private val userProfileService: UserProfileService) 
         userProfileService.deleteUser(userId)
     }
 
+    @PostMapping("/seed")
+    fun seedUsers(count: Int): ResponseEntity<List<UUID>> {
+        println("Seeding database with $count user profiles")
+
+        val tempUserCache = mutableMapOf<UUID, UserProfile>()
+
+        for (i in 1..count) {
+            val user = userSeedService.getRandomProfile()
+            tempUserCache[user.id] = user
+            userProfileService.setUser(user)
+        }
+
+        return ResponseEntity(tempUserCache.keys.toList(), HttpStatus.OK)
+    }
+
     @PutMapping("/random")
     fun putRandomUserProfile(): UserProfileApiResponseEntity {
         println("Create random user profile")
-        val user = userProfileService.getRandomProfile()
+        val user = userSeedService.getRandomProfile()
         userProfileService.setUser(user)
 
         return user.toApiResponseEntity()
