@@ -5,7 +5,7 @@ import java.util.UUID
 sealed class ApiErrorMessage {
     data class UserNotFound(val userId: Any) : ApiErrorMessage()
     data class InvalidUuidFormat(val uuid: UUID) : ApiErrorMessage()
-    object InvalidRequest : ApiErrorMessage()
+    data object InvalidRequest : ApiErrorMessage()
 
     override fun toString(): String = when (this) {
         is UserNotFound -> "User with ID [$userId] not found"
