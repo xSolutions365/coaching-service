@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
 import java.util.UUID
@@ -18,20 +19,26 @@ import java.util.UUID
 class UserProfileController(private val userProfileService: UserProfileService) {
 
     @GetMapping("/{userId}")
-    fun getUserProfile(@PathVariable userId: UUID): UserProfile? {
-        System.out.println("Fetching user profile for userId: $userId")
+    fun getUserProfile(@PathVariable userId: UUID): UserProfileApiResponseEntity {
+        println("Fetching user profile for userId: $userId")
 
-        return userProfileService.getUser(userId);
+        val user = userProfileService.getUser(userId)
+        return user.toApiResponseEntity()
     }
 
-    @GetMapping("/all")
-    fun getAllUsers(): List<UserProfile> {
-       return userProfileService.getUsers()
+    @GetMapping("/all/{page}")
+    fun getAllUsers(@PathVariable page: Int): UserProfileApiResponseEntity {
+        println("Fetching all user profiles")
+
+        val users = userProfileService.getUsers(page)
+        return users.toApiResponseEntity()
     }
 
     @PostMapping("/seed")
     fun seedUsers(count: Int): List<UUID> {
-        return userProfileService.seed(count);
+        println("Seeding database with $count user profiles")
+
+        return userProfileService.seed(count)
     }
 
     @DeleteMapping("/{userId}")
@@ -41,12 +48,13 @@ class UserProfileController(private val userProfileService: UserProfileService) 
         userProfileService.deleteUser(userId)
     }
 
-    @GetMapping("/random")
-    fun getRandomUserProfile(): UserProfile {
+    @PutMapping("/random")
+    fun putRandomUserProfile(): UserProfileApiResponseEntity {
+        println("Create random user profile")
         val user = userProfileService.getRandomProfile()
         userProfileService.setUser(user);
 
-        return user
+        return user.toApiResponseEntity();
     }
 
     // -- Extension Functions --

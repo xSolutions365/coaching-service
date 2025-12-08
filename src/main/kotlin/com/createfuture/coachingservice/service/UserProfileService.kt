@@ -10,10 +10,19 @@ class UserProfileService {
 
     // TODO: This should interact with persistence, somewhere
     private var userCache = mutableMapOf<UUID, UserProfile>()
+    private val pageSize = 10;
 
+    fun deleteUser(userId: UUID) = userCache.remove(userId)
 
-    fun getUsers(): List<UserProfile> {
-        return userCache.values.toList()
+    fun getUsers(page: Int): List<UserProfile> {
+        val startIndex = (page - 1) * pageSize
+        val endIndex = (startIndex + pageSize).coerceAtMost(userCache.size)
+
+        if (startIndex >= userCache.size) {
+            return emptyList()
+        }
+
+        return userCache.values.toList().subList(startIndex, endIndex)
     }
 
     fun getUser(userId: UUID): UserProfile? {
