@@ -52,9 +52,9 @@ class UserProfileController(private val userProfileService: UserProfileService) 
     fun putRandomUserProfile(): UserProfileApiResponseEntity {
         println("Create random user profile")
         val user = userProfileService.getRandomProfile()
-        userProfileService.setUser(user);
+        userProfileService.setUser(user)
 
-        return user.toApiResponseEntity();
+        return user.toApiResponseEntity()
     }
 
     // -- Extension Functions --
