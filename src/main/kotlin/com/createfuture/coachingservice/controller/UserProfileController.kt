@@ -1,7 +1,6 @@
 package com.createfuture.coachingservice.controller
 
 import com.createfuture.coachingservice.model.NewUserProfile
-import com.createfuture.coachingservice.model.UserProfile
 import com.createfuture.coachingservice.model.response.UserProfileApiResponseEntity
 import com.createfuture.coachingservice.model.toApiResponseEntity
 import com.createfuture.coachingservice.service.UserProfileService
@@ -39,7 +38,6 @@ class UserProfileController(private val userProfileService: UserProfileService) 
 
         userProfileService.deleteUser(userId)
     }
-
 
     @GetMapping("/all/{page}")
     fun getAllUsers(@PathVariable page: Int): UserProfileApiResponseEntity {

@@ -16,9 +16,9 @@ class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException::class)
     fun handleTypeMismatch(ex: MethodArgumentTypeMismatchException): UserProfileApiResponseEntity {
         val response = UserProfileApiResponse(
-             error = ErrorApiResponse(
+            error = ErrorApiResponse(
                 Instant.now(),
-                 ApiErrorMessage.InvalidRequest,
+                ApiErrorMessage.InvalidRequest,
                 ex.parameter.method?.name ?: "Method name unavailable"
             )
         )

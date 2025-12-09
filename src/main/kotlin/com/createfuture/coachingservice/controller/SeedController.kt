@@ -14,8 +14,10 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/api/v1/seed")
-class SeedController(private val userProfileService: UserProfileService,
-                     private val userSeedService: UserSeedService) {
+class SeedController(
+    private val userProfileService: UserProfileService,
+    private val userSeedService: UserSeedService
+) {
 
     @PostMapping("/users")
     fun seedUsers(count: Int): ResponseEntity<List<UUID>> {

@@ -11,7 +11,7 @@ class UserProfileService {
 
     // TODO: This should interact with persistence, somewhere
     private var userCache = mutableMapOf<UUID, UserProfile>()
-    private val pageSize = 100;
+    private val pageSize = 100
 
     fun deleteUser(userId: UUID) = userCache.remove(userId)
 
