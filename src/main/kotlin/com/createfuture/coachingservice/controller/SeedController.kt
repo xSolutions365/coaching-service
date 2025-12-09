@@ -21,17 +21,18 @@ class SeedController(
 
     @PostMapping("/users")
     fun seedUsers(count: Int): ResponseEntity<List<UUID>> {
+        require(count in 1..1000) { "Must generate between 1 and 1000 users at a time" }
         println("Seeding database with $count user profiles")
 
-        val tempUserCache = mutableMapOf<UUID, UserProfile>()
+        val createdUserIds = ArrayList<UUID>()
 
-        for (i in 1..count) {
+        repeat(count) {
             val user = userSeedService.getRandomProfile()
-            tempUserCache[user.id] = user
             userProfileService.setUser(user)
+            createdUserIds.add(user.id)
         }
 
-        return ResponseEntity(tempUserCache.keys.toList(), HttpStatus.OK)
+        return ResponseEntity(createdUserIds, HttpStatus.OK)
     }
 
     @PostMapping("/user")
