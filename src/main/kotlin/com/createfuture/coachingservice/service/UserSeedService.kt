@@ -7,16 +7,19 @@ import java.util.UUID.randomUUID
 @Service
 class UserSeedService {
 
-    fun getRandomName(): String {
-        val namesStream = javaClass.classLoader.getResourceAsStream("names.txt")
-        val names = namesStream?.bufferedReader()?.readLines() ?: listOf("Foo")
-
-        val surnamesStream = javaClass.classLoader.getResourceAsStream("surnames.txt")
-        val surnames = surnamesStream?.bufferedReader()?.readLines() ?: listOf("Bar")
-
-        return "${names.random()} ${surnames.random()}"
+    private val names: List<String> by lazy {
+        javaClass.classLoader.getResourceAsStream("names.txt")
+            ?.bufferedReader()?.readLines() ?: listOf("Foo")
     }
 
+    private val surnames: List<String> by lazy {
+        javaClass.classLoader.getResourceAsStream("surnames.txt")
+            ?.bufferedReader()?.readLines() ?: listOf("Bar")
+    }
+
+    fun getRandomName(): String {
+        return "${names.random()} ${surnames.random()}"
+    }
 
     fun getRandomProfile(): UserProfile {
         val name = getRandomName()
