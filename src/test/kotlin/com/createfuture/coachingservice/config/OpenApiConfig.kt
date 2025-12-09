@@ -13,9 +13,9 @@ class OpenApiConfig {
         return OpenAPI()
             .info(
                 Info()
-                    .title("My Kotlin API")
+                    .title("Coaching Service API")
                     .version("1.0.0")
-                    .description("API documentation for my Spring Boot Kotlin application")
+                    .description("A matchmaking service connecting learners to mentors.")
             )
     }
 }
