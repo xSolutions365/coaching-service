@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
 import java.util.UUID
@@ -20,7 +21,7 @@ import java.util.UUID
 class UserProfileController(private val userProfileService: UserProfileService) {
 
     @PostMapping
-    fun createUserProfile(newUser: NewUserProfile): UserProfileApiResponseEntity {
+    fun createUserProfile(@RequestBody newUser: NewUserProfile): UserProfileApiResponseEntity {
         println("Creating new user profile")
 
         val user = userProfileService.createUser(newUser)
@@ -30,7 +31,7 @@ class UserProfileController(private val userProfileService: UserProfileService) 
     @PutMapping("/{userId}")
     fun updateUserProfile(
         @PathVariable userId: UUID,
-        updatedUser: NewUserProfile
+        @RequestBody updatedUser: NewUserProfile
     ): UserProfileApiResponseEntity {
         println("Updating user profile for userId: $userId")
         return userProfileService.updateUser(userId, updatedUser).toApiResponseEntity()
