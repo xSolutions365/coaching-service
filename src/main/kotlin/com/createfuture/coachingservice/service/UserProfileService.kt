@@ -1,5 +1,6 @@
 package com.createfuture.coachingservice.service
 
+import com.createfuture.coachingservice.model.NewUserProfile
 import com.createfuture.coachingservice.model.UserProfile
 import org.springframework.stereotype.Service
 import java.util.UUID
@@ -28,8 +29,24 @@ class UserProfileService {
     fun getUser(userId: UUID): UserProfile? {
         return userCache[userId]
     }
-    
+
     fun setUser(userProfile: UserProfile) {
         userCache[userProfile.id] = userProfile
+    }
+
+    fun createUser(userProfile: NewUserProfile): UserProfile {
+        val newUser = UserProfile(
+            id = randomUUID(),
+            username = userProfile.username,
+            preferredName = userProfile.preferredName,
+            slackUsername = userProfile.slackUsername,
+            email = userProfile.email,
+            phoneNumber = userProfile.phoneNumber,
+            bio = userProfile.bio,
+            profilePictureUrl = userProfile.profilePictureUrl
+        )
+
+        userCache[newUser.id] = newUser
+        return newUser
     }
 }
