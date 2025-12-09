@@ -4,6 +4,8 @@ import com.createfuture.coachingservice.model.response.UserProfileApiResponseEnt
 import com.createfuture.coachingservice.model.toApiResponseEntity
 import com.createfuture.coachingservice.service.UserProfileService
 import com.createfuture.coachingservice.service.UserSeedService
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -18,10 +20,14 @@ class SeedController(
     private val userSeedService: UserSeedService
 ) {
 
+    companion object {
+        private val logger: Logger = LoggerFactory.getLogger(SeedController::class.java)
+    }
+
     @PostMapping("/users")
     fun seedUsers(count: Int): ResponseEntity<List<UUID>> {
         require(count in 1..1000) { "Must generate between 1 and 1000 users at a time" }
-        println("Seeding database with $count user profiles")
+        logger.info("Seeding database with $count user profiles")
 
         val createdUserIds = mutableListOf<UUID>()
 
@@ -36,7 +42,7 @@ class SeedController(
 
     @PostMapping("/user")
     fun putRandomUserProfile(): UserProfileApiResponseEntity {
-        println("Create random user profile")
+        logger.info("Create random user profile")
         val user = userSeedService.getRandomProfile()
         userProfileService.setUser(user)
 
