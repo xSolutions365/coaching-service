@@ -49,4 +49,22 @@ class UserProfileService {
         userCache[newUser.id] = newUser
         return newUser
     }
+
+    fun updateUser(userId: UUID, updatedUser: NewUserProfile): UserProfile? {
+        val existingUser = userCache[userId] ?: return null
+
+        val newUserProfile = UserProfile(
+            id = existingUser.id,
+            username = updatedUser.username,
+            preferredName = updatedUser.preferredName,
+            slackUsername = updatedUser.slackUsername,
+            email = updatedUser.email,
+            phoneNumber = updatedUser.phoneNumber,
+            bio = updatedUser.bio,
+            profilePictureUrl = updatedUser.profilePictureUrl
+        )
+
+        userCache[userId] = newUserProfile
+        return newUserProfile
+    }
 }
