@@ -48,12 +48,4 @@ class UserProfileController(private val userProfileService: UserProfileService) 
 
         userProfileService.deleteUser(userId)
     }
-
-    @GetMapping("/all/{page}")
-    fun getAllUsers(@PathVariable page: Int): UserProfileApiResponseEntity {
-        println("Fetching all user profiles")
-
-        val users = userProfileService.getUsers(page)
-        return users.toApiResponseEntity()
-    }
 }
