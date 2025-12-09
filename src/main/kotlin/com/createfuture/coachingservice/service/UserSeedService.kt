@@ -2,7 +2,6 @@ package com.createfuture.coachingservice.service
 
 import com.createfuture.coachingservice.model.UserProfile
 import org.springframework.stereotype.Service
-import java.util.UUID
 import java.util.UUID.randomUUID
 
 @Service
