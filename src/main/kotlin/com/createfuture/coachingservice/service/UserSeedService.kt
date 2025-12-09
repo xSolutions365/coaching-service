@@ -9,10 +9,10 @@ class UserSeedService {
 
     fun getRandomName(): String {
         val namesStream = javaClass.classLoader.getResourceAsStream("names.txt")
-        val names = namesStream?.bufferedReader()?.readLines() ?: listOf("Random User")
+        val names = namesStream?.bufferedReader()?.readLines() ?: listOf("Foo")
 
         val surnamesStream = javaClass.classLoader.getResourceAsStream("surnames.txt")
-        val surnames = surnamesStream?.bufferedReader()?.readLines() ?: listOf("Random User")
+        val surnames = surnamesStream?.bufferedReader()?.readLines() ?: listOf("Bar")
 
         return "${names.random()} ${surnames.random()}"
     }

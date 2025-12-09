@@ -1,6 +1,5 @@
 package com.createfuture.coachingservice.controller
 
-import com.createfuture.coachingservice.model.UserProfile
 import com.createfuture.coachingservice.model.response.UserProfileApiResponseEntity
 import com.createfuture.coachingservice.model.toApiResponseEntity
 import com.createfuture.coachingservice.service.UserProfileService
@@ -24,7 +23,7 @@ class SeedController(
         require(count in 1..1000) { "Must generate between 1 and 1000 users at a time" }
         println("Seeding database with $count user profiles")
 
-        val createdUserIds = ArrayList<UUID>()
+        val createdUserIds = mutableListOf<UUID>()
 
         repeat(count) {
             val user = userSeedService.getRandomProfile()

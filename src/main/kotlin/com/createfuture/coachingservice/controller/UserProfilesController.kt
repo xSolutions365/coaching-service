@@ -14,7 +14,7 @@ class UserProfilesController(private val userProfileService: UserProfileService)
 
     @GetMapping("/{page}")
     fun getAllUsers(@PathVariable page: Int): UserProfileApiResponseEntity {
-        require(page < 0) { "Page number cannot be negative" }
+        require(page > 0) { "Page number cannot be negative" }
         println("Fetching user profiles for page: $page")
 
         val users = userProfileService.getUsers(page)
