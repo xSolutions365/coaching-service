@@ -4,6 +4,8 @@ import com.createfuture.coachingservice.model.NewUserProfile
 import com.createfuture.coachingservice.model.response.UserProfileApiResponseEntity
 import com.createfuture.coachingservice.model.toApiResponseEntity
 import com.createfuture.coachingservice.service.UserProfileService
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -43,9 +45,10 @@ class UserProfileController(private val userProfileService: UserProfileService) 
     }
 
     @DeleteMapping("/{userId}")
-    fun deleteUserProfile(@PathVariable userId: UUID) {
+    fun deleteUserProfile(@PathVariable userId: UUID): ResponseEntity<Unit> {
         println("Deleting user profile for userId: $userId")
-
         userProfileService.deleteUser(userId)
+
+        return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 }
