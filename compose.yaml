@@ -1,0 +1,7 @@
+services:
+  coachingService:
+    build: .
+    image: coaching-service:latest
+    ports:
+      - "8080:8080"
+
