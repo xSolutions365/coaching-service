@@ -12,6 +12,7 @@ import org.mockito.kotlin.any
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertNotNull
+import org.mockito.kotlin.whenever
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
@@ -58,7 +59,7 @@ class UserProfileControllerTest {
 
     @Test
     fun getUserProfileRespondsWithNullResponseWhenUserNotFound() {
-        Mockito.`when`(userProfileService.getUser(validUuid))
+        whenever(userProfileService.getUser(validUuid))
             .thenReturn(null)
 
         val response = controller.getUserProfile(validUuid)
@@ -69,7 +70,7 @@ class UserProfileControllerTest {
 
     @Test
     fun getUserProfileRespondsWithUserProfileWhenFound() {
-        Mockito.`when`(userProfileService.getUser(validUuid))
+        whenever(userProfileService.getUser(validUuid))
             .thenReturn(testUserProfile)
 
         val response = controller.getUserProfile(validUuid)
@@ -111,7 +112,7 @@ class UserProfileControllerTest {
     @Test
     fun createUserProfileRespondsWithUserWhenValidUserProvided() {
 
-        Mockito.`when`(userProfileService.createUser(any())).thenReturn(testUserProfile)
+        whenever(userProfileService.createUser(any())).thenReturn(testUserProfile)
 
         val response = controller.createUserProfile(testNewUserProfile)
 
@@ -129,7 +130,7 @@ class UserProfileControllerTest {
     @Test
     fun updateUserProfileRespondsWithUserWhenValidUserProvided() {
 
-        Mockito.`when`(userProfileService.updateUser(any(), any())).thenReturn(testUserProfile)
+        whenever(userProfileService.updateUser(any(), any())).thenReturn(testUserProfile)
 
         val response = controller.updateUserProfile(validUuid, testNewUserProfile)
 

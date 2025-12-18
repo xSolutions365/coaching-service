@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertNotNull
 import org.mockito.Mockito
+import org.mockito.kotlin.whenever
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -32,7 +33,7 @@ class SeedControllerTest {
 
     @BeforeEach
     fun setUp() {
-        Mockito.`when`(userSeedService.getRandomProfile())
+        whenever(userSeedService.getRandomProfile())
             .thenReturn(getTestUserWithRandomUuid())
     }
 
