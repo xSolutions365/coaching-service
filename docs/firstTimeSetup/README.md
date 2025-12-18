@@ -19,7 +19,7 @@ git clone https://github.com/xSolutions365/coaching-service
 
 ## Step 1: Set up SDKMan and Java
 
-This project uses `Java 21` to build and run the application.
+This project uses `Java 17` to build and run the application.
 
 
 > **Why?**  
@@ -50,15 +50,15 @@ EOF
 source ~/.zshrc
 ```
 
-### Install Java 21
+### Install Java 17
 
-Once SDKMan is installed, install Java 21 using the following command:
+Once SDKMan is installed, install Java 17 using the following command:
 
 ```bash
-  sdk install java 21.0.9-amzn
+  sdk install java 17.0.15-amzn
 ```
 
-You can set this as your default version with `sdk default java 21.0.9-amzn`, or use it for the current terminal session with `sdk use java 21.0.9-amzn`.
+You can set this as your default version with `sdk default java 17.0.15-amzn`, or use it for the current terminal session with `sdk use java 17.0.15-amzn`.
 
 Verify your installation by running:
 
@@ -66,7 +66,7 @@ Verify your installation by running:
   java -version
 ```
 
-You should see `openjdk version "21.0.9" 2025-10-21 LTS` in the output.
+You should see `openjdk version "17.0.15" 2025-04-15 LTS` in the output.
 
 ## Step 2: Install IntelliJ
 
@@ -93,7 +93,7 @@ Press the "Open" button, and select the folder where you cloned the repository.
 
 ### Select the correct JDK
 
-When prompted, select the correct JDK (Java 21) for the project.
+When prompted, select the correct JDK (Java 17) for the project.
 
 ### Get Maven building
 

@@ -1,4 +1,4 @@
-package com.createfuture.coaching.service
+package com.createfuture.coachingservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class CoachingServiceApplication
 
 fun main(args: Array<String>) {
-	runApplication<CoachingServiceApplication>(*args)
+    runApplication<CoachingServiceApplication>(*args)
 }
