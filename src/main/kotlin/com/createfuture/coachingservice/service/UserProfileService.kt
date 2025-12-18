@@ -13,7 +13,9 @@ class UserProfileService {
     private var userCache = mutableMapOf<UUID, UserProfile>()
     private val pageSize = 100
 
-    fun deleteUser(userId: UUID) = userCache.remove(userId)
+    fun deleteUser(userId: UUID): Unit {
+        userCache.remove(userId)
+    }
 
     fun getUsers(page: Int): List<UserProfile> {
         val startIndex = (page - 1) * pageSize
@@ -46,8 +48,12 @@ class UserProfileService {
             profilePictureUrl = userProfile.profilePictureUrl
         )
 
-        userCache[newUser.id] = newUser
+        insertUser(newUser)
         return newUser
+    }
+
+    fun insertUser(userProfile: UserProfile) {
+        userCache[userProfile.id] = userProfile
     }
 
     fun updateUser(userId: UUID, updatedUser: NewUserProfile): UserProfile? {
@@ -64,7 +70,7 @@ class UserProfileService {
             profilePictureUrl = updatedUser.profilePictureUrl
         )
 
-        userCache[userId] = newUserProfile
+        insertUser(newUserProfile)
         return newUserProfile
     }
 }
