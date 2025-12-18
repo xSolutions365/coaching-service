@@ -48,12 +48,8 @@ class UserProfileService {
             profilePictureUrl = userProfile.profilePictureUrl
         )
 
-        insertUser(newUser)
+        setUser(newUser)
         return newUser
-    }
-
-    fun insertUser(userProfile: UserProfile) {
-        userCache[userProfile.id] = userProfile
     }
 
     fun updateUser(userId: UUID, updatedUser: NewUserProfile): UserProfile? {
@@ -70,7 +66,7 @@ class UserProfileService {
             profilePictureUrl = updatedUser.profilePictureUrl
         )
 
-        insertUser(newUserProfile)
+        setUser(newUserProfile)
         return newUserProfile
     }
 }

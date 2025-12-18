@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
@@ -25,7 +26,7 @@ class SeedController(
     }
 
     @PostMapping("/users")
-    fun seedUsers(count: Int): ResponseEntity<List<UUID>> {
+    fun seedUsers(@RequestParam count: Int): ResponseEntity<List<UUID>> {
         require(count in 1..1000) { "Must generate between 1 and 1000 users at a time" }
         logger.info("Seeding database with $count user profiles")
 
@@ -41,8 +42,8 @@ class SeedController(
     }
 
     @PostMapping("/user")
-    fun putRandomUserProfile(): UserProfileApiResponseEntity {
-        logger.info("Create random user profile")
+    fun createRandomUserProfile(): UserProfileApiResponseEntity {
+        logger.info("Creating random user profile")
         val user = userSeedService.getRandomProfile()
         userProfileService.setUser(user)
 

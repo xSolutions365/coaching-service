@@ -69,7 +69,7 @@ class SeedControllerTest {
 
     @Test
     fun putRandomUserProfileReturnsUserProfileApiResponseEntity() {
-        val response = controller.putRandomUserProfile()
+        val response = controller.createRandomUserProfile()
         assert(response.statusCode == HttpStatus.OK)
         assertNotNull(response.body)
         assertNotNull(response.body?.userProfile)
