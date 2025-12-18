@@ -28,7 +28,7 @@ class UserSeedServiceTest {
         assertTrue(profile.id.toString().isNotBlank())
         assertTrue(profile.username.isNotBlank())
         assertTrue(profile.preferredName.isNotBlank())
-        assertTrue(profile.username.isNotBlank())
+        assertTrue(profile.slackUsername?.isNotBlank() ?: false)
         assertTrue(profile.email?.matches(Regex("^[\\w.]+@createfuture.com$")) ?: false)
     }
 }

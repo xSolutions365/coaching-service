@@ -3,7 +3,7 @@ package com.createfuture.coachingservice.model.response
 import java.util.UUID
 
 sealed class ApiErrorMessage {
-    data class UserNotFound(val userId: Any) : ApiErrorMessage()
+    data class UserNotFound(val userId: UUID) : ApiErrorMessage()
     data class InvalidUuidFormat(val uuid: String) : ApiErrorMessage()
     data object InvalidRequest : ApiErrorMessage()
 
